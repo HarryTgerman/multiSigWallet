@@ -83,7 +83,7 @@ const ChangeOwnerModal: React.FC<Props> = ({ visible, onClose }) => {
         >
             {error && <Alert message={error.message} type="error" />}
             <Form layout="vertical">
-                <Form.Item label="Pay 4 Ether to Replace last Owner">
+                <Form.Item label="Pay more than 4 Ether to replace last Owner">
                     <Input
                         type="number"
                         min={4}

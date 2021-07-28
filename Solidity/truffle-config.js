@@ -18,6 +18,8 @@
  *
  */
 
+require('dotenv').config()
+
 const HDWalletProvider = require("@truffle/hdwallet-provider")
 const providerURL = process.env.INFURAKEY
 const fs = require("fs")
@@ -58,7 +60,7 @@ module.exports = {
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     ropsten: {
-      provider: () =>
+      provider:
         new HDWalletProvider(
           mnemonic,
           providerURL

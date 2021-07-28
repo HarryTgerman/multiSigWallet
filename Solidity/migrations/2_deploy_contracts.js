@@ -9,10 +9,10 @@ module.exports = function (deployer, network, accounts) {
   }
 
   console.log("-----------------------------")
-  console.log(network, "network", accounts)
+  console.log(process.env.INFURAKEY, Accounts)
   console.log("-----------------------------")
 
-  const owners = network === "development" ? accounts.slice(0, 3) : process.env.ACCOUNTS
+  const owners = network === "develop" ? accounts.slice(0, 3) : Accounts
   const numConfirmationsRequired = 2
 
   return deployer.deploy(MultiSigWallet, owners, numConfirmationsRequired)

@@ -16691,18 +16691,19 @@
         }
       },
       "links": {},
-      "address": "0xBa8f05161f25542F53669D0eD980C1E22D65c712",
-      "transactionHash": "0x8f9fc19cc99c2f7e7035b5360c827a61009142e966dbecbde91089a1eed13ada"
+      "address": "0x92649a242C563b5E439f599B2a22304531E36c0F",
+      "transactionHash": "0x14222e98dd14edc6fc5f66c00d5057a025e8afaefe3e61c784aab0e192d4a9fb"
     },
     "5777": {
       "events": {},
       "links": {},
       "address": "0x29E2cf5d2BF316B7CB8d08Dcf7FFf4dEE52F17b5",
-      "transactionHash": "0x1fb18057618121f74798dc39fff1c76548380031d51d05a02a14a8dc3358b48a"
+      "transactionHash": "0x8a9622d881c79592fbfc069cba92ba1c5f5ccc86b7fa1d8a3d5465302d973689"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-07-28T18:55:10.957Z",
+  "updatedAt": "2021-07-28T19:40:51.827Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },
