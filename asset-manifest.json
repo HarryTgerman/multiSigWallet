@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/HarryTgerman/multiSigWallet/static/css/main.361ca821.chunk.css",
+    "main.js": "/HarryTgerman/multiSigWallet/static/js/main.4aa46203.chunk.js",
+    "main.js.map": "/HarryTgerman/multiSigWallet/static/js/main.4aa46203.chunk.js.map",
+    "runtime-main.js": "/HarryTgerman/multiSigWallet/static/js/runtime-main.afec6a43.js",
+    "runtime-main.js.map": "/HarryTgerman/multiSigWallet/static/js/runtime-main.afec6a43.js.map",
+    "static/css/2.1cca6b83.chunk.css": "/HarryTgerman/multiSigWallet/static/css/2.1cca6b83.chunk.css",
+    "static/js/2.9a43a6f9.chunk.js": "/HarryTgerman/multiSigWallet/static/js/2.9a43a6f9.chunk.js",
+    "static/js/2.9a43a6f9.chunk.js.map": "/HarryTgerman/multiSigWallet/static/js/2.9a43a6f9.chunk.js.map",
+    "index.html": "/HarryTgerman/multiSigWallet/index.html",
+    "precache-manifest.e2e8bccde2b2476ab2ae8ffebfc47893.js": "/HarryTgerman/multiSigWallet/precache-manifest.e2e8bccde2b2476ab2ae8ffebfc47893.js",
+    "service-worker.js": "/HarryTgerman/multiSigWallet/service-worker.js",
+    "static/css/2.1cca6b83.chunk.css.map": "/HarryTgerman/multiSigWallet/static/css/2.1cca6b83.chunk.css.map",
+    "static/css/main.361ca821.chunk.css.map": "/HarryTgerman/multiSigWallet/static/css/main.361ca821.chunk.css.map",
+    "static/js/2.9a43a6f9.chunk.js.LICENSE.txt": "/HarryTgerman/multiSigWallet/static/js/2.9a43a6f9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.afec6a43.js",
+    "static/css/2.1cca6b83.chunk.css",
+    "static/js/2.9a43a6f9.chunk.js",
+    "static/css/main.361ca821.chunk.css",
+    "static/js/main.4aa46203.chunk.js"
+  ]
+}
