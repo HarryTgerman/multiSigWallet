@@ -4,8 +4,7 @@ import useAsync from "../Hooks/useAsync";
 import "./index.css"
 import { useWeb3Context } from "../contexts/Web3";
 import MultiSigWallet from "./components/MultiSigWallet";
-// import Footer from "./Footer";
-// import Network from "./Network";
+import Network from "./components/Network";
 import { Layout, Avatar, Menu, Button, Typography, List, message } from 'antd';
 import { GithubOutlined, UserOutlined } from '@ant-design/icons';
 import TransactionList from "./components/TransactionList";
@@ -69,11 +68,12 @@ function App() {
         <Content style={{ padding: '0 50px' }}>
           <div className="site-layout-content">
             <Title>Multi Signature Wallet</Title>
+            {netId !== 0 && <Network netId={netId} />}
             <MultiSigWallet />
             <TransactionList />
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Coded By Harry Trippel <a target="_blank" href="https://github.com/harrytgerman/"> <GithubOutlined /> </a></Footer>
+        <Footer style={{ textAlign: 'center' }}>Coded By Harry Trippel <a target="_blank" href="https://github.com/HarryTgerman/multiSigWallet"> <GithubOutlined /> </a></Footer>
       </Layout>,
     </div>
   );

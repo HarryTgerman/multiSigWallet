@@ -14,6 +14,7 @@ interface State {
   address: string;
   balance: string;
   owners: string[];
+  ownerData: string[];
   numConfirmationsRequired: number;
   transactionCount: number;
   transactions: Transaction[];
@@ -33,6 +34,7 @@ const INITIAL_STATE: State = {
   address: "",
   balance: "0",
   owners: [],
+  ownerData: [],
   numConfirmationsRequired: 0,
   transactionCount: 0,
   transactions: [],

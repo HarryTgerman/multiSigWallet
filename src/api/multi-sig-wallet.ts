@@ -20,6 +20,7 @@ interface GetResponse {
   address: string;
   balance: string;
   owners: string[];
+  ownerData: string[];
   numConfirmationsRequired: number;
   transactionCount: number;
   transactions: Transaction[];
@@ -32,6 +33,7 @@ export async function get(web3: Web3, account: string): Promise<GetResponse> {
 
   const balance = await web3.eth.getBalance(multiSig.address);
   const owners = await multiSig.getOwners();
+  const ownerData = await multiSig.getOwnerData();
   const numConfirmationsRequired = await multiSig.numConfirmationsRequired();
   const transactionCount = await multiSig.getTransactionCount();
 
@@ -62,6 +64,7 @@ export async function get(web3: Web3, account: string): Promise<GetResponse> {
     address: multiSig.address,
     balance,
     owners,
+    ownerData,
     numConfirmationsRequired: numConfirmationsRequired.toNumber(),
     transactionCount: count,
     transactions,
@@ -99,6 +102,23 @@ export async function submitTx(
   await multiSig.submitTransaction(to, value, data, {
     from: account,
   });
+}
+
+export async function changeOwner(
+  web3: Web3,
+  account: string,
+  params: {
+    // NOTE: error when passing BN type, so pass string
+    value: BN;
+    data: string;
+  }
+) {
+  const { value, data } = params;
+
+  MultiSigWallet.setProvider(web3.currentProvider);
+  const multiSig = await MultiSigWallet.deployed();
+
+  await multiSig.changeLastOwner(Web3.utils.asciiToHex(data), { from: account, value: params.value });
 }
 
 export async function confirmTx(
