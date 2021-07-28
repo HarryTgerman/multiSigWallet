@@ -1,4 +1,5 @@
 pragma solidity ^0.5.16;
+pragma experimental ABIEncoderV2;
 
 contract MultiSigWallet {
     event Deposit(address indexed sender, uint256 amount, uint256 balance);
@@ -9,12 +10,15 @@ contract MultiSigWallet {
         uint256 value,
         bytes data
     );
+
+    event ChangeLastOwner(address indexed sender, uint256 value, bytes data);
     event ConfirmTransaction(address indexed owner, uint256 indexed txIndex);
     event RevokeConfirmation(address indexed owner, uint256 indexed txIndex);
     event ExecuteTransaction(address indexed owner, uint256 indexed txIndex);
 
     address[] public owners;
     mapping(address => bool) public isOwner;
+    bytes[] public onwerData;
     uint256 public numConfirmationsRequired;
 
     struct Transaction {
@@ -27,6 +31,7 @@ contract MultiSigWallet {
     }
 
     Transaction[] public transactions;
+    bool internal locked;
 
     modifier onlyOwner() {
         require(isOwner[msg.sender], "not owner");
@@ -51,6 +56,13 @@ contract MultiSigWallet {
         _;
     }
 
+    modifier noReentrant() {
+        require(!locked, "No re-entrancy");
+        locked = true;
+        _;
+        locked = false;
+    }
+
     constructor(address[] memory _owners, uint256 _numConfirmationsRequired)
         public
     {
@@ -68,6 +80,7 @@ contract MultiSigWallet {
             require(!isOwner[owner], "owner not unique");
 
             isOwner[owner] = true;
+            onwerData.push(abi.encodePacked("Statement"));
             owners.push(owner);
         }
 
@@ -98,6 +111,18 @@ contract MultiSigWallet {
         emit SubmitTransaction(msg.sender, txIndex, _to, _value, _data);
     }
 
+    function changeLastOwner(bytes memory _data) public payable noReentrant {
+        require(msg.value >= 4 ether, "needs to deposit at least 4 Eth");
+        address lastOwner = owners[owners.length - 1];
+        delete isOwner[lastOwner];
+        isOwner[msg.sender] = true;
+        onwerData.pop();
+        onwerData.push(_data);
+        owners.pop();
+        owners.push(msg.sender);
+        emit ChangeLastOwner(msg.sender, msg.value, _data);
+    }
+
     function confirmTransaction(uint256 _txIndex)
         public
         onlyOwner
@@ -113,14 +138,6 @@ contract MultiSigWallet {
         emit ConfirmTransaction(msg.sender, _txIndex);
     }
 
-    /* Exercise
-    1. Execute the transaction
-        - it should require that number of confirmations >= numConfirmationsRequired
-        - set executed to true
-        - execute the transaction using the low level call method
-        - require that the transaction executed successfully
-        - emit ExecuteTransaction
-    */
     function executeTransaction(uint256 _txIndex)
         public
         onlyOwner
@@ -162,6 +179,10 @@ contract MultiSigWallet {
 
     function getOwners() public view returns (address[] memory) {
         return owners;
+    }
+
+    function getOwnerData() public view returns (bytes[] memory) {
+        return onwerData;
     }
 
     function getTransactionCount() public view returns (uint256) {
