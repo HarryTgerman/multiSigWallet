@@ -8,6 +8,7 @@ import MultiSigWallet from "./components/MultiSigWallet";
 // import Network from "./Network";
 import { Layout, Avatar, Menu, Button, Typography, List, message } from 'antd';
 import { GithubOutlined, UserOutlined } from '@ant-design/icons';
+import TransactionList from "./components/TransactionList";
 
 
 const { Header, Footer, Content } = Layout;
@@ -69,6 +70,7 @@ function App() {
           <div className="site-layout-content">
             <Title>Multi Signature Wallet</Title>
             <MultiSigWallet />
+            <TransactionList />
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Coded By Harry Trippel <a target="_blank" href="https://github.com/harrytgerman/"> <GithubOutlined /> </a></Footer>

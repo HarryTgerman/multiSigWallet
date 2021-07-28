@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Web3 from "web3";
 import BN from "bn.js";
-import { Button, List, Typography, Statistic, Row, Col, Modal, InputNumber, message } from "antd";
+import { Button, List, Typography, Statistic, Row, Col, Modal, InputNumber, message, Space } from "antd";
 import { deposit } from "../../../api/multi-sig-wallet";
 import { useMultiSigWalletContext } from "../../../contexts/MultiSigWallet";
 import { useWeb3Context } from "../../../contexts/Web3";
 import useAsync from "../../../Hooks/useAsync";
+import TxModal from "../TransactionModal";
 
 // import DepositForm from "./DepositForm";
 // import CreateTxModal from "./CreateTxModal";
@@ -52,7 +53,8 @@ export default function MultiSigWallet() {
             return;
         }
 
-        const value = Web3.utils.toBN(input);
+        const transformedInput = web3.utils.toWei(`${input}`, "ether")
+        const value = Web3.utils.toBN(transformedInput);
         const zero = Web3.utils.toBN(0);
 
         if (value.gt(zero)) {
@@ -77,10 +79,6 @@ export default function MultiSigWallet() {
         setVisible(false);
     };
 
-    const onChangeInput = (value: number) => {
-        if (web3)
-            setInput(web3?.utils.toWei(`${value}`, "ether"))
-    }
 
     return (
         <div>
@@ -99,7 +97,7 @@ export default function MultiSigWallet() {
             <List
                 itemLayout="horizontal"
                 header={<Typography.Title level={3}>Owners</Typography.Title>}
-                footer={<Button type="primary" onClick={showModal}>Deposit Ether</Button>}
+                footer={<div> <Button type="primary" onClick={showModal}>Deposit Ether</Button><Button style={{ marginLeft: "8px" }} type="primary" onClick={() => openModal(true)}>Create Transaction</Button></div>}
 
                 dataSource={state.owners}
                 renderItem={item => (
@@ -119,8 +117,9 @@ export default function MultiSigWallet() {
                 onCancel={handleCancel}
                 okText="Deposit"
             >
-                <InputNumber onChange={onChangeInput} />
+                <InputNumber value={input} onChange={setInput} />
             </Modal>
+            <TxModal visible={open} onClose={() => openModal(false)} />
         </div>
     );
 }

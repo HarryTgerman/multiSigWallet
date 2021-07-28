@@ -60,7 +60,7 @@ export async function get(web3: Web3, account: string): Promise<GetResponse> {
 
   return {
     address: multiSig.address,
-    balance: balance,
+    balance,
     owners,
     numConfirmationsRequired: numConfirmationsRequired.toNumber(),
     transactionCount: count,
@@ -142,10 +142,7 @@ export async function executeTx(
     txIndex: number;
   }
 ) {
-  /*
-  Exercise
-  Write code that will call executeTransaction on MultiSigWallet contract
-  */
+
   const { txIndex } = params;
 
   MultiSigWallet.setProvider(web3.currentProvider);
@@ -210,19 +207,6 @@ interface RevokeConfirmation {
   };
 }
 
-/*
-Exercise
-Define an interface ExecuteTransaction.
-The shape of the interface should be the following:
-
-{
-  event: "ExecuteTransaction";
-  returnValues: {
-    owner: string;
-    txIndex: string;
-  };
-}
-*/
 interface ExecuteTransaction {
   event: "ExecuteTransaction";
   returnValues: {
@@ -231,9 +215,6 @@ interface ExecuteTransaction {
   };
 }
 
-/*
-Exercise - Add ExecuteTransaction to Log type
-*/
 type Log =
   | Deposit
   | SubmitTransaction
